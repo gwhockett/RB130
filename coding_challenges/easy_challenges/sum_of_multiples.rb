@@ -1,19 +1,15 @@
 class SumOfMultiples
   def initialize(*divisors)
-    @divisors = ((divisors.size == 0) ? [3, 5] : divisors)
+    @divisors = divisors.empty? ? [3, 5] : divisors
   end
 
   def to(natural)
-    multiples = []
-    (1...natural).each do |i|
-      @divisors.each do |div|
-        multiples << i if i % div == 0
-      end
-    end
-    multiples.uniq.sum
+    (1...natural).select do |i|
+      @divisors.any? { |div| (i % div).zero? }
+    end.sum
   end
 
   def self.to(number)
-    SumOfMultiples.new.to(number)
+    new().to(number)
   end
 end
