@@ -1,21 +1,31 @@
 n_factors = (0..).to_enum
 
-def factorial(n)
+def factorial_recursion(n)
   return 1 if n == 0
-  n = factorial(n - 1) * n
+  n = factorial_recursion(n - 1) * n
 end
+
+#def factorial_reduce(n)
+#  (1..n).reduce(1, :*)
+#end
+#
+#factorial_cache = { 0 = 1 }
+#
+#def factorial_memoization(n)
+#  factorial_cache[n] ||= n * factorial(n - 1)
+#end
 
 def factorial_iterator(enumerator, total_iterations)
   iteration = 0
   while iteration < total_iterations
     n = enumerator.next
-    puts "#{n}! == #{factorial(n)}"
+    puts "#{n}! == #{factorial_recursion(n)}"
     iteration += 1
   end
 end
 
 puts n_factors
-factorial_iterator(n_factors, 7)
+factorial_iterator(n_factors, 5)
 puts "==============="
 puts n_factors.rewind
 factorial_iterator(n_factors, 3)
@@ -76,3 +86,4 @@ class ExIterator
     @max_iterations = max_iterations
   end
 end
+=end
