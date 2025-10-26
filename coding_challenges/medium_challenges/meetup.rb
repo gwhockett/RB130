@@ -1,3 +1,4 @@
+=begin
 require 'date'
 
 class Meetup
@@ -37,5 +38,27 @@ class Meetup
     when 'saturday'then meetup.saturday?
     when 'sunday'then meetup.sunday?
     end
+  end
+end
+=end
+require 'date'
+
+class Meetup
+  DOWM = ['first', (1..7), 'second', (8..14), 'third', (15..21),
+          'fourth', (22..28), 'fifth', (29..31), 'last', (-7..-1),
+          'teenth', (13..19)].each_cons(2).to_a.to_h
+
+  def initialize(year, month)
+    @year = year
+    @month = month
+  end
+
+  def day(weekday, schedule)
+    DOWM[schedule.downcase].each do |day|
+      return nil unless Date.valid_date?(@year, @month, day)
+      date = Date.civil(@year, @month, day)
+      return date if date.send "#{weekday.downcase}?"
+    end
+    nil
   end
 end

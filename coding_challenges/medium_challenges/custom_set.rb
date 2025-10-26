@@ -1,3 +1,4 @@
+=begin
 class CustomSet
   attr_reader :set
 
@@ -56,5 +57,61 @@ class CustomSet
 
   def ==(other)
     set == other.set
+  end
+end
+=end
+class CustomSet
+  attr_reader :set
+
+  protected :set
+
+  def initialize(ary=[])
+    @set = ary.uniq
+  end
+
+  def empty?
+    set.empty?
+  end
+
+  def contains?(obj)
+    set.include?(obj)
+  end
+
+  def subset?(other_set)
+    set_difference = set - other_set.set
+    set_difference.empty?
+  end
+
+  def disjoint?(other_set)
+    set_difference = set - other_set.set
+    set == set_difference
+  end
+
+  def eql?(other_set)
+    self == other_set
+  end
+
+  def ==(other_set)
+    set.uniq.sort == other_set.set.uniq.sort
+  end
+
+  def add(obj)
+    @set << obj
+    @set = set.uniq
+    self
+  end
+
+  def intersection(other_set)
+    set_intersection = set.intersection(other_set.set)
+    CustomSet.new(set_intersection)
+  end
+
+  def difference(other_set)
+    set_difference = set - other_set.set
+    CustomSet.new(set_difference)
+  end
+
+  def union(other_set)
+    CustomSet.new(set + other_set.set)
   end
 end

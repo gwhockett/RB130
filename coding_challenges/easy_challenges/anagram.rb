@@ -12,7 +12,7 @@ class Anagram
     end
   end
 end
-=end
+
 class Anagram
   def initialize(word)
     @word = word.downcase
@@ -30,5 +30,18 @@ class Anagram
 
   def not_same_word?(possible)
     @word != possible.downcase
+  end
+end
+=end
+class Anagram
+  def initialize(word)
+    @word = word.downcase
+  end
+
+  def match(ary)
+    ary.select do |test_word|
+      @word.chars.sort == test_word.downcase.chars.sort &&
+        test_word.downcase != @word
+    end
   end
 end

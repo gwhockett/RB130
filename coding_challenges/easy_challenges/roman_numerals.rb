@@ -1,43 +1,5 @@
-=begin
-Problem:
-  Convert Roman Numerals to decimal
-  I = 1
-  V = 5
-  X = 10
-  L = 50
-  C = 100
-  D = 500
-  M = 1000
+# frozen_string_literal: false
 
-  Don't worry about numbers larger than 3000
-  Roman numerals are written showing each digit separately. Starting from the
-  left most decimal digit, skip any digit that is a zero.
-
-Examples and Test cases:
-  The given test cases show we need to create a `RomanNumeral` class. 
-  We need at least two methods:
-    A constructor that accepts an argument integer as a string
-    A method `to_roman` that returns the equivalent Roman numeral as a string
-
-    Its very likely we will need to create some helper methods
-
-Data Structure:
-  The input is an integer and the output is a string. Using a collection that
-  has the conversions would be helpful as for conversion. Another intermediary collection
-  would might be helpful for breaking down the input digit into equivalent Roman numeral
-  counterparts.
-
-Algorithim:
-  Constuctor:
-    Accept a number as an argument.
-    Save it.
-  Roman Numeral collection:
-    Make a collection that links important Roman numberal strings to their
-    digit counterparts. This collection should be in descending order.
-
-  Method: Convert ot Roman Numeral
-
-=end
 class RomanNumeral
   attr_reader :digits
 

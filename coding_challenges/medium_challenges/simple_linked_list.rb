@@ -1,3 +1,5 @@
+=begin
+
 class Element
   attr_reader :datum, :next
 
@@ -83,3 +85,79 @@ class SimpleLinkedList
   end
 end
 
+=end
+
+class Element
+  attr_reader :next, :datum
+
+  def initialize(datum, next_element=nil)
+    @datum = datum
+    @next = next_element
+  end
+
+  def tail?
+    self.next.nil?
+  end
+end
+
+class SimpleLinkedList
+  attr_reader :head
+
+  def self.from_a(ary)
+    new_list = new
+    return new_list if !ary
+    ary.reverse.each do |obj|
+      new_list.push(obj)
+    end
+    new_list
+  end
+
+  def to_a
+    result = []
+    current_element = @head
+    while current_element
+      result << current_element.datum
+      current_element = current_element.next
+    end
+    result
+  end
+
+  def push(obj)
+      @head = Element.new(obj, @head)
+  end
+
+  def pop
+    current_element = @head
+    @head = @head.next
+    current_element.datum
+  end
+
+  def size
+    return 0 if empty?
+    list_size = 1
+    current_element = head
+    while current_element.next
+      list_size += 1
+      current_element = current_element.next
+    end
+    list_size
+  end
+
+  def empty?
+    head.nil?
+  end
+
+  def peek
+    empty? ? head : head.datum
+  end
+
+  def reverse
+    new_list = SimpleLinkedList.new
+    current_element = head
+    while current_element
+      new_list.push(current_element.datum)
+      current_element = current_element.next
+    end
+    new_list
+  end
+end

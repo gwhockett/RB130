@@ -18,7 +18,7 @@ class Diamond
     string_stack.join("\n") + "\n"
   end
 end
-=end
+
 class Diamond
   def self.make_diamond(letter)
     letters = ('A'..letter.upcase).to_a
@@ -50,3 +50,30 @@ end
 
 Diamond.make_diamond('n')
 Diamond.make_diamond_with_x('n')
+=end
+
+class Diamond
+  SPACE_SIZE = {
+    "B" => 1,
+    "C" => 3,
+    "D" => 5,
+    "E" => 7
+  }
+
+  def self.make_diamond(middle_letter)
+    return "A\n" if middle_letter == "A"
+    diamond_seed = []
+
+    diamond_letters = ("A"..middle_letter).to_a.reverse
+    diamond_letters.each_with_index do |letter, space|
+      if letter == "A"
+        diamond_seed << "#{' ' * space}#{letter}#{' ' * space}"
+      else
+        diamond_seed << "#{' ' * space}#{letter}#{' ' * SPACE_SIZE[letter]}" \
+                        "#{letter}#{' ' * space}"
+      end
+    end
+    diamond = diamond_seed.reverse[0..-2] + diamond_seed
+    "#{diamond.join("\n")}\n"
+  end
+end

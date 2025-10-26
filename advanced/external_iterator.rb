@@ -87,3 +87,15 @@ class ExIterator
   end
 end
 =end
+
+def output_factorial_values(i)
+  factors = (0..i).to_enum
+  total = factors.next
+  total.zero? ? total = 1 : total 
+  while i > 0
+    i -= 1
+    puts total *= factors.next
+  end
+end
+
+output_factorial_values(5)

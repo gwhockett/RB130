@@ -1,3 +1,4 @@
+=begin
 class Clock
   attr_accessor :hour, :minutes
 
@@ -31,6 +32,37 @@ class Clock
 
   def to_s
     sprintf('%02d:%02d', @hour, @minutes)
+  end
+end
+=end
+
+class Clock
+  attr_reader :hour, :minutes, :total_minutes
+
+  def initialize(hour, minutes=0)
+    @total_minutes = (hour * 60) + minutes
+    @hour = (@total_minutes / 60) % 24
+    @minutes = @total_minutes % 60
+  end
+
+  def +(minutes)
+    Clock.new(0, total_minutes + minutes)
+  end
+
+  def -(minutes)
+    Clock.new(0, total_minutes - minutes)
+  end
+
+  def ==(other_clock)
+    to_s == other_clock.to_s
+  end
+
+  def self.at(hour, minutes=0)
+    Clock.new(hour, minutes)
+  end
+
+  def to_s
+    format('%.2d:%.2d', hour, minutes)
   end
 end
 

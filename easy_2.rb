@@ -173,8 +173,21 @@ def each_cons(array, cons=1)
   nil
 end
 
+def each_cons(ary, cons_size=2)
+  start = 0
+  last = cons_size - 1
+  while last < ary.size
+    yield(*ary[start, cons_size])
+    # use of the splat turn each element of the array into its own argument
+    start += 1
+    last += 1
+  end
+
+  nil
+end
+
 hash = {}
-each_cons([1, 3, 6, 10], 3) do |value1, *values|
+each_cons([1, 3, 6, 10], 3) do |value1, *values| # splat collects all remaining arugments into an array
   hash[value1] = values
 end
 p hash == { 1 => [3, 6], 3 => [6, 10] }
